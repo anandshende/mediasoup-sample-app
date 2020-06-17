@@ -47,16 +47,17 @@ async function runExpressApp() {
 }
 
 async function runWebServer() {
-  const { sslKey, sslCrt } = config;
-  if (!fs.existsSync(sslKey) || !fs.existsSync(sslCrt)) {
-    console.error('SSL files are not found. check your config.js file');
-    process.exit(0);
-  }
-  const tls = {
-    cert: fs.readFileSync(sslCrt),
-    key: fs.readFileSync(sslKey),
-  };
-  webServer = https.createServer(tls, expressApp);
+  // const { sslKey, sslCrt } = config;
+  // if (!fs.existsSync(sslKey) || !fs.existsSync(sslCrt)) {
+  //   console.error('SSL files are not found. check your config.js file');
+  //   process.exit(0);
+  // }
+  // const tls = {
+  //   cert: fs.readFileSync(sslCrt),
+  //   key: fs.readFileSync(sslKey),
+  // };
+  // webServer = https.createServer(tls, expressApp);
+  webServer = https.createServer(expressApp);
   webServer.on('error', (err) => {
     console.error('starting web server failed:', err.message);
   });
